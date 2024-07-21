@@ -170,22 +170,17 @@ void prenderLedNumero(int numeroLed){
     switch(numeroLed){
         case 1: 
         ledArm = 1;
-        serial_port.write( "LedArm encendido\r\n", 18);
-        serial_port.write( "Presione Boton 1 para continuar\r\n", 33);
         break;
         case 2: 
         ledReady = 1; 
-        serial_port.write( "LedReady encendido\r\n", 20);
-        serial_port.write( "Presione Boton 1 para continuar\r\n", 33);
         break;
         case 3: 
         ledSystem = 1; 
-        serial_port.write( "LedSystem encendido\r\n", 21);
-        serial_port.write( "Presione Boton 1 para continuar\r\n", 33);
         break;
         default: 
         break;
     }
+    serial_port.write( "Presione Boton 1 para continuar\r\n", 33);
 }
 
 void controlarLed(){
