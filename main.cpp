@@ -110,18 +110,15 @@ void secuenciaLed(){
         ledArm = ON;
         ledReady = OFF;
         ledSystem = OFF;
-    }
-    if(accumulatedTime >= 250 && accumulatedTime < 500){
+    } else if(accumulatedTime < 500){
         ledArm = OFF;
         ledReady = ON;
         ledSystem = OFF;
-    }
-    if(accumulatedTime >= 500 && accumulatedTime < 750){
+    } else if(accumulatedTime < 750){
         ledArm = OFF;
         ledReady = OFF;
         ledSystem = ON;
-    }
-    if(accumulatedTime == 750){
+    } else{
         accumulatedTime = 0;
     }
 }
