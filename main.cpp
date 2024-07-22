@@ -19,6 +19,7 @@ y el adc termina el test y apaga todo y pone fin al test*/
 #define BUZZER		    PB_5
 #define TIME_INCREMENT_MS   10
 #define TIME_OVER           600 //1200
+#define CICLOS_ANTIREBOTE   4//(4 ciclos de 10ms)
 
 static UnbufferedSerial serial_port(USBTX, USBRX, 9600);
 
@@ -36,8 +37,18 @@ DigitalOut outBuzzer(BUZZER);
 
 AnalogIn batVol(VBAT);
 
+//=====[Declarations of public data types]=========================
+
+typedef enum {
+    BUTTON_UP,
+    BUTTON_FALLING,
+    BUTTON_DOWN,
+    BUTTON_RISING
+} buttonState_t;
+
 //=====[Declaration and initialization of public global variables]=============
 
+buttonState_t tec_1_State;
 bool timerOutActivated = true;
 bool runTest = false;
 bool endTest = false;
@@ -52,6 +63,8 @@ int accumulatedTime = 0;
 int testNum = 0;
 
 float vbatReading = 0.0;
+
+int accumulatedDebounceTime = 0;
 
 //=====[Declarations (prototypes) of public functions]=========================
 
@@ -70,6 +83,9 @@ void prenderLedNumero(int );
 void beepBeep();
 void mostrarLecturaAdc();
 
+void debounceTeclaInit();
+bool debouceTecUpdate();
+
 //=====[Main function, the program entry point after power on or reset]========
 
 int main()
@@ -77,6 +93,7 @@ int main()
     inputsInit();
     outputsInit();
     serial_port.write( "Presione Tecla1 + Tecla 2 para iniciar test\r\n", 45);
+    debounceTeclaInit();
     while (true) {
         previoTest();
         startTest();
@@ -131,14 +148,21 @@ void previoTest(){
 
 void startTest(){
     if(runTest == false && endTest == false){
-        if(tecla_1 == 1 && tecla_2 == 1){
-            runTest = true;
-            ledArm = 0;
-            ledReady = 0;
-            ledSystem = 0;
-            accumulatedTime = 0;
-            timeout = 0;
-			delay(250);
+	static bool button1Pressed = false;
+        static bool button2Pressed = false;
+        if(tecla_1 == 1){
+	    button1Pressed = true;
+	}
+	if(tecla_2 == 1){
+	    button2Pressed = true;
+	}
+	if(button1Pressed && button2Pressed){
+	    if(tecla_1 == 0 && tecla_2 == 0 && tecla_3 == 0){
+	        runTest = true;
+	        apagarLeds();
+	        accumulatedTime = 0;
+	        timeout = 0;
+            }
         }
     }
 }
@@ -185,23 +209,23 @@ void prenderLedNumero(int numeroLed){
 
 void controlarLed(){
     static int currentLED = 0;
+    static bool button1Pressed = false;
     if(currentLED == 0){
             serial_port.write( "Testear LEDS\r\n", 14);
             serial_port.write( "Presione Tecla 1 para continuar\r\n", 33);
             currentLED++;
-        }
-    if (tecla_1 == 1) {
-        delay(250);
-        timeout = 0;
-        apagarLeds();
-        prenderLedNumero(currentLED);
-        currentLED++;
-        if (currentLED > 4) {
-            timeout = 0;
-            apagarLeds();
-            finishRecorrerLeds = true;
-        }
-    }   
+    }else{
+	    bool pulsacionRealTec1 = debouceTecUpdate();
+	    if(pulsacionRealTec1 == true){
+		    apagarLeds();
+		    prenderLedNumero(currentLED);
+		    currentLED++;
+	    } else if (currentLED > 4) {
+		    timeout = 0;
+		    apagarLeds();
+		    finishRecorrerLeds = true;
+	    }
+    }
 }
 
 void end_Test(){
@@ -257,7 +281,6 @@ void recorrer_teclas(){
     		if(tecla_1 == 1){
     			serial_port.write( "Presione Tecla 2 para continuar\r\n", 33);
 		        timeout = 0;
-		        delay(250);
 		        buttonNumberTest ++;
     		}
             break;
@@ -265,7 +288,6 @@ void recorrer_teclas(){
     		if(tecla_2 == 1){
     			serial_port.write( "Presione Tecla 3 para continuar\r\n", 33);
 		        timeout = 0;
-		        delay(250);
 		        buttonNumberTest ++;
     		}
             break;
@@ -273,7 +295,6 @@ void recorrer_teclas(){
     		if(tecla_3 == 1){
     			serial_port.write( "Fin Test Teclas\r\n", 17);
 		        timeout = 0;
-		        delay(250);
 		        buttonNumberTest = 4;
 		        finishRecorrerTeclas = true;
     		}
@@ -300,7 +321,6 @@ void beepBeep(){
     if(cont == 5 && tecla_1 == 1){
         timeout = 0;
         finishBuzzer = true;
-        delay(250);
     }
 }
 
@@ -308,9 +328,8 @@ void mostrarLecturaAdc(){
     static bool mensaje = false;
 
     if(finishReadAdc == false && mensaje == false){
-        serial_port.write( "Lectura ADC\r\n", 21);
+        serial_port.write( "Lectura ADC\r\n", 13);
         taskADC(); 
-        serial_port.write( "Presione Boton 1 para Finalizar\r\n", 33);
         mensaje = true;
     }
     if(finishReadAdc == false && tecla_1 == 1){
@@ -318,6 +337,59 @@ void mostrarLecturaAdc(){
         serial_port.write( "Fin del Testeo\r\n", 16);
         finishReadAdc = true;
         endTest = true;
-        delay(250);
     }   
+}
+
+void debounceTeclaInit(){
+    if(tecla_1.read() == 1){
+        tec_1_State = BUTTON_DOWN;
+    }
+    else{
+        tec_1_State = BUTTON_UP;
+    }
+}
+
+bool debouceTecUpdate(){
+    bool tec_1_ReleaseEvent = false;
+    switch (tec_1_State) {
+    case BUTTON_UP:
+        if(tecla_1.read() == 1){
+            tec_1_State = BUTTON_FALLING;
+            accumulatedDebounceTime = 0;
+        }
+        break;
+    case BUTTON_FALLING:
+        if(accumulatedDebounceTime >= CICLOS_ANTIREBOTE){
+            if(tecla_1.read() == 1){
+                tec_1_State = BUTTON_DOWN;
+            }
+            else{
+                tec_1_State = BUTTON_UP;
+            }
+        }
+        accumulatedDebounceTime ++; 
+        break;
+    case BUTTON_RISING:
+        if(accumulatedDebounceTime >= CICLOS_ANTIREBOTE){
+                if(tecla_1.read() == 0){
+                    tec_1_State = BUTTON_UP;
+                    tec_1_ReleaseEvent = true;
+                }
+                else{
+                    tec_1_State = BUTTON_DOWN;
+                }
+        }
+        accumulatedDebounceTime ++; 
+        break;
+    case BUTTON_DOWN:
+        if(tecla_1.read() == 0){
+            tec_1_State = BUTTON_RISING;
+            accumulatedDebounceTime = 0;
+        }
+        break;
+    default:
+        debounceTeclaInit();
+        break;
+    }
+    return tec_1_ReleaseEvent;
 }
