@@ -106,17 +106,15 @@ void actualizarEstado(){
     switch (current_State) {
         case PREVIOUS_TEST:
             secuenciaLed();
-            if(tecla_1.read() == 1){
-                    if(tecla_2.read() == 1){
-                        timeOut = 0;
-                        nextState = TEC1_TEST;
-                        current_State = STATE_DEBOUNCE;
-                        ledArm = OFF;
-                        ledReady = OFF;
-                        ledSystem = OFF;
-                        serial_port.write( "INICIO DEL TEST\r\n", 17);
-                        serial_port.write( "Presione Tecla 1 para continuar\r\n", 33);
-                    }
+            if((tecla_1.read() == 1) && (tecla_2.read() == 1)){
+		timeOut = 0;
+		nextState = TEC1_TEST;
+		current_State = STATE_DEBOUNCE;
+		ledArm = OFF;
+		ledReady = OFF;
+		ledSystem = OFF;
+		serial_port.write( "INICIO DEL TEST\r\n", 17);
+		serial_port.write( "Presione Tecla 1 para continuar\r\n", 33);
             }
             break;
 			
