@@ -244,9 +244,7 @@ void actualizarEstado(){
 void taskADC(){
     char str[100];
     int stringLength;
-    float vbatReading;
-    vbatReading = batVol.read();
-    vbatReading = 3.3 * vbatReading;
+    float vbatReading = 3.3 * batVol.read();
     sprintf(str, "Voltaje: %.2f V\r\n", vbatReading);
     stringLength = strlen(str);
     serial_port.write(str, stringLength);
