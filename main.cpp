@@ -66,7 +66,6 @@ int timeOut = 0;
 
 void inputsInit();
 void outputsInit();
-void estadoInicial();
 void actualizarEstado();
 void taskADC();
 void secuenciaLed();
@@ -79,7 +78,6 @@ int main()
 {
     inputsInit();
     outputsInit();
-    estadoInicial();
     serial_port.write( "Presione Tecla1 + Tecla 2 para iniciar test\r\n", 45);
 
     while (true) {
@@ -102,11 +100,6 @@ void outputsInit(){
     ledReady = OFF;
     ledSystem = OFF;
     outBuzzer = OFF;
-}
-
-void estadoInicial(){
-    current_State = PREVIOUS_TEST;
-    nextState = PREVIOUS_TEST;
 }
 
 void actualizarEstado(){
