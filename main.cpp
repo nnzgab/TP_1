@@ -74,8 +74,7 @@ void checkTimeout();
 
 //=====[Main function, the program entry point after power on or reset]========
 
-int main()
-{
+int main() {
     inputsInit();
     outputsInit();
     serial_port.write( "Presione Tecla1 + Tecla 2 para iniciar test\r\n", 45);
@@ -89,24 +88,24 @@ int main()
 
 //=====[Implementations of public functions]===================================
 
-void inputsInit(){
+void inputsInit() {
     tecla_1.mode(PullDown);
     tecla_2.mode(PullDown);
     tecla_3.mode(PullDown);
 }
 
-void outputsInit(){
+void outputsInit() {
     ledArm = OFF;
     ledReady = OFF;
     ledSystem = OFF;
     outBuzzer = OFF;
 }
 
-void actualizarEstado(){
+void actualizarEstado() {
     switch (current_State) {
         case PREVIOUS_TEST:
             secuenciaLed();
-            if((tecla_1.read() == 1) && (tecla_2.read() == 1)){
+            if ((tecla_1.read() == 1) && (tecla_2.read() == 1)) {
 		timeOut = 0;
 		nextState = TEC1_TEST;
 		current_State = STATE_DEBOUNCE;
@@ -119,7 +118,7 @@ void actualizarEstado(){
             break;
 			
         case TEC1_TEST:
-            if(tecla_1.read() == 1){
+            if (tecla_1.read() == 1) {
                 timeOut = 0;
                 nextState = TEC2_TEST;
                 current_State = STATE_DEBOUNCE;
@@ -128,7 +127,7 @@ void actualizarEstado(){
             break;
 
         case TEC2_TEST:
-            if(tecla_2.read() == 1){
+            if (tecla_2.read() == 1) {
                 timeOut = 0;
                 nextState = TEC3_TEST;
                 current_State = STATE_DEBOUNCE;
@@ -137,7 +136,7 @@ void actualizarEstado(){
             break;
 
         case TEC3_TEST:
-            if(tecla_3.read() == 1){
+            if (tecla_3.read() == 1) {
                 timeOut = 0;
                 nextState = LED1_TEST;
                 current_State = STATE_DEBOUNCE;
@@ -146,7 +145,7 @@ void actualizarEstado(){
             break;
 
         case LED1_TEST:
-            if(tecla_1.read() == 1){
+            if (tecla_1.read() == 1) {
                 timeOut = 0;
                 nextState = LED2_TEST;
                 current_State = STATE_DEBOUNCE;
@@ -158,7 +157,7 @@ void actualizarEstado(){
             break;
 
         case LED2_TEST:
-            if(tecla_1.read() == 1){
+            if (tecla_1.read() == 1) {
                 timeOut = 0;
                 nextState = LED3_TEST;
                 current_State = STATE_DEBOUNCE;
@@ -170,7 +169,7 @@ void actualizarEstado(){
             break;
         
         case LED3_TEST:
-            if(tecla_1.read() == 1){
+            if (tecla_1.read() == 1) {
                 timeOut = 0;
                 nextState = BUZZER_TEST;
                 current_State = STATE_DEBOUNCE;
@@ -192,31 +191,30 @@ void actualizarEstado(){
                 ledReady = OFF;
                 ledSystem = OFF;
                 probarBuzzer = true;
-            }else if(probarBuzzer == true){
+            } else if (probarBuzzer == true) {
 
-                if(timeOn < BUZZER_TIME_ON){
+                if (timeOn < BUZZER_TIME_ON) {
                     timeOut = 0;
                     outBuzzer = ON;
                     timeOn = timeOn + TIME_INCREMENT_MS;
-                }
-                else{
-                    timeOut = 0;
-                    outBuzzer = OFF;
-                    current_State = ADC_TEST;
-                    serial_port.write( "Presione Tecla 1 para continuar\r\n", 33); 
-                    probarBuzzer = false;
+                } else {
+		    timeOut = 0;
+		    outBuzzer = OFF;
+		    current_State = ADC_TEST;
+		    serial_port.write( "Presione Tecla 1 para continuar\r\n", 33);
+		    probarBuzzer = false;
                 }
             }
             break;
 
         case ADC_TEST:
             static bool leerADC = false;
-            if(tecla_1.read() == 1){
+            if (tecla_1.read() == 1) {
                 nextState = ADC_TEST;
                 current_State = STATE_DEBOUNCE;
                 timeOut = 0;
                 leerADC = true;
-            }else if(leerADC == true){
+            } else if (leerADC == true) {
                 taskADC();
                 serial_port.write( "FINAL DEL TEST\r\n", 16);
                 current_State = END_TEST;
@@ -229,17 +227,17 @@ void actualizarEstado(){
 
         case STATE_DEBOUNCE:
             static int accumulatedDebounceTime = 0;
-            if(accumulatedDebounceTime >= DEBOUNCE_TIME_MS){
+            if (accumulatedDebounceTime >= DEBOUNCE_TIME_MS) {
                 current_State = nextState;
                 accumulatedDebounceTime = 0;
-            }else{
+            } else {
                 accumulatedDebounceTime =   accumulatedDebounceTime + TIME_INCREMENT_MS;
             }
             break;
     }
 }
 
-void taskADC(){
+void taskADC() {
     char str[100];
     int stringLength;
     float vbatReading = 3.3 * batVol.read();
@@ -248,13 +246,13 @@ void taskADC(){
     serial_port.write(str, stringLength);
 }
 
-void secuenciaLed(){
+void secuenciaLed() {
     static int accumulatedTime = 0;
     accumulatedTime = accumulatedTime + TIME_INCREMENT_MS;
     if(accumulatedTime == 750){
-		accumulatedTime = 0;
-	} else if(accumulatedTime < 250){
-		ledArm = ON;
+	accumulatedTime = 0;
+	} else if (accumulatedTime < 250) {
+	ledArm = ON;
         ledReady = OFF;
         ledSystem = OFF;
 	} else if(accumulatedTime < 500){
@@ -262,41 +260,40 @@ void secuenciaLed(){
         ledReady = ON;
         ledSystem = OFF;
 	} else{
-		ledArm = OFF;
-		ledReady = OFF;
-		ledSystem = ON;
+	ledArm = OFF;
+	ledReady = OFF;
+	ledSystem = ON;
 	}			
 }
 
 void blinking_all_leds(){
     static int accumulatedTime = 0;
-    if(accumulatedTime > 250){
+    if (accumulatedTime > 250) {
         ledArm = !ledArm;
         ledReady = !ledReady;
         ledSystem = !ledSystem;
         accumulatedTime = 0;
-    }
-    else{
+    } else {
         accumulatedTime = accumulatedTime + TIME_INCREMENT_MS;
     } 
 }
 
 void checkTimeout(){
-    if(timeOutActivated == true){
-        if(current_State == END_TEST){
+    if (timeOutActivated == true) {
+        if (current_State == END_TEST) {
             timeOutActivated = false;
             timeOut = 0;
-        }else if(timeOut == TIME_OVER){
+        } else if (timeOut == TIME_OVER){
             serial_port.write( "Fin de Test x Time out!!!\r\n", 27);
             ledArm = OFF;
             ledReady = OFF;
             ledSystem = OFF;
             current_State = END_TEST;
             timeOutActivated = false;
-        }else{
+        } else {
             timeOut++;
         }
-    }else{
+    } else {
         timeOut = 0;
     }
 }
