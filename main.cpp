@@ -241,8 +241,7 @@ void taskADC() {
     char str[100];
     int stringLength;
     float vbatReading = 3.3 * batVol.read();
-    sprintf(str, "Voltaje: %.2f V\r\n", vbatReading);
-    stringLength = strlen(str);
+    stringLength = sprintf(str, "Voltaje: %.2f V\r\n", vbatReading);
     serial_port.write(str, stringLength);
 }
 
