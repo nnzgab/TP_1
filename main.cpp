@@ -1,4 +1,4 @@
-//trabajar con este codigo que se aprobo en el Tp1 para el Tp2
+//trabajar con este codigo Tp1 para el Tp2
 /*
 TP2 AGREGAR:
 - manejo de teclado matricial
@@ -15,14 +15,14 @@ TP2 AGREGAR:
 
 //=====[Defines]===============================================================
 //TECLADO MATRICIAL entradas
-#define C1      	    PA_8
+#define C1      	PA_8
 #define C2              PA_9
 #define C3              PA_10
 #define C4              PA_15
 #define C5              PB_15
 
 //TECLADO MATRICIAL salidas: 
-#define F1      	    PB_0
+#define F1      	PB_0
 #define F2              PB_1
 #define F3              PB_4
 
@@ -45,7 +45,7 @@ TP2 AGREGAR:
 #define VBAT        	PA_1
 
 // PINES DE BUZZER
-#define BUZZER		    PB_5
+#define BUZZER		PB_5
 
 //TIEMPOS
 #define TIME_INCREMENT_MS   10
@@ -54,13 +54,13 @@ TP2 AGREGAR:
 #define TIME_OVER           600 //1200  falta implementar
 
 #define TEC_MAT_NUM_COLUMNAS 5
-#define TEC_MAT_NUM_FILAS 3
+#define TEC_MAT_NUM_FILAS    3
 #define TIEMPO_ANTIREBOTE_MS 40
 
 //MAXIMOS
-#define MAX_LED_SISTEMA 3
-#define MAX_LED_ZONAS 6
-#define MAX_ADC		2
+#define MAX_LED_SISTEMA      3
+#define MAX_LED_ZONAS        6
+#define MAX_ADC		     2
 
 //=====[Declaration of public data types]======================================
 
@@ -176,22 +176,17 @@ void actualizarEstado(){
     switch (current_State) {
 
         case PREVIOUS_TEST:
-			if( detectarInicioTest() == true ){
-				//nextState = TEC1_TEST;
-                //current_State = STATE_DEBOUNCE; // probar si no es suficiente pasar a tec1_ test y sacar el estado debounce po que el anti rebote se incluye en actualizarTercladoMatricial()
-				timeOut = 0;
+	    if( detectarInicioTest() == true ){
+	        timeOut = 0;
                 //apagarLeds()
-				//ledArm = OFF;
-				//ledReady = OFF;
-				//ledSystem = OFF;
-				serial_port.write( "INICIO DEL TEST\r\n", 17);
-				serial_port.write( "Presione '1' para continuar\r\n", 29);
+		serial_port.write( "INICIO DEL TEST\r\n", 17);
+		serial_port.write( "Presione '1' para continuar\r\n", 29);
                 current_State = TEC1_TEST;
-				//actualizarTercladoMatricial();
-			}
+		//actualizarTercladoMatricial();
+            }
             break;
-			
-		case TEC1_TEST:
+	    
+	case TEC1_TEST:
             if(actualizarTecladoMatricial() == '1'){ //incluye antirebote
                 timeOut = 0;
                 current_State = TEC2_TEST;
@@ -271,7 +266,7 @@ void actualizarEstado(){
             }
             break;
 			
-		case TEC_NUM_TEST:
+	case TEC_NUM_TEST:
             if(actualizarTecladoMatricial() == '#'){ //incluye antirebote
                 timeOut = 0;
                 current_State = TEC_P_TEST;
@@ -279,7 +274,7 @@ void actualizarEstado(){
             }
             break;
 		
-		case TEC_P_TEST:
+	case TEC_P_TEST:
             if(actualizarTecladoMatricial() == 'P'){ //incluye antirebote
                 timeOut = 0;
                 current_State = TEC_F_TEST;
@@ -295,7 +290,7 @@ void actualizarEstado(){
             }
              break;
 
-		case TEC_E_TEST:
+	case TEC_E_TEST:
             if(actualizarTecladoMatricial() == 'E'){ //incluye antirebote
                 timeOut = 0;
                 current_State = LED_SISTEMA_TEST;
@@ -303,83 +298,78 @@ void actualizarEstado(){
             }
             break;
 		
-		case LED_SISTEMA_TEST:
-			static int cont = 0;
-			if(actualizarTecladoMatricial() == '#'){
-				cont ++;
-				prenderLedSistemaNumero(cont);
-				serial_port.write( "Presione Tecla # para continuar\r\n", 33);
-				if(cont == MAX_LED_SISTEMA){
-					current_State = LED_ZONAS_TEST;
-					serial_port.write( "Presione Tecla # para continuar\r\n", 33);
-				}
-			}
+	case LED_SISTEMA_TEST:
+	    static int cont = 0;
+	    if(actualizarTecladoMatricial() == '#'){
+		cont ++;
+		prenderLedSistemaNumero(cont);
+		serial_port.write( "Presione Tecla # para continuar\r\n", 33);
+		if(cont == MAX_LED_SISTEMA){
+		    current_State = LED_ZONAS_TEST;
+		    serial_port.write( "Presione Tecla # para continuar\r\n", 33);
+		}
+	    }
             break;
 			
-		case LED_ZONAS_TEST:
-			static int cont_led = 0;
-			if(actualizarTecladoMatricial() == '#'){
-				cont_led ++;
-				prenderLedZonaNumero(cont_led);
-				serial_port.write( "Presione Tecla # para continuar\r\n", 33);
-				if(cont_led == MAX_LED_ZONAS){
-					current_State = BUZZER_TEST;
-					serial_port.write( "Presione Tecla # para continuar\r\n", 33);
-				}
-			}
+	case LED_ZONAS_TEST:
+	    static int cont_led = 0;
+	    if(actualizarTecladoMatricial() == '#'){
+	    	cont_led ++;
+		prenderLedZonaNumero(cont_led);
+		serial_port.write( "Presione Tecla # para continuar\r\n", 33);
+		if(cont_led == MAX_LED_ZONAS){
+		    current_State = BUZZER_TEST;
+		    serial_port.write( "Presione Tecla # para continuar\r\n", 33);
+		}
+	    }
+	    break;
 
-		case BUZZER_TEST:
-			static bool onBuzzer = false;
-			static int timeOnBuzzer = 0;
-			if(actualizarTecladoMatricial() == '#'){
-				onBuzzer = true;
-			}
-			if(onBuzzer == true){
-				timeOnBuzzer = timeOnBuzzer + TIME_INCREMENT_MS;
-				outBuzzer = ON;
-				if(timeOnBuzzer >= BUZZER_TIME_ON){
-					outBuzzer = OFF;
-					current_State = ADC_TEST;
-				}
-			}
-		break;
+	case BUZZER_TEST:
+	    static bool onBuzzer = false;
+	    static int timeOnBuzzer = 0;
+	    if(actualizarTecladoMatricial() == '#'){
+		onBuzzer = true;
+	    }
+	    if(onBuzzer == true){
+		timeOnBuzzer = timeOnBuzzer + TIME_INCREMENT_MS;
+		outBuzzer = ON;
+		if(timeOnBuzzer >= BUZZER_TIME_ON){
+		    outBuzzer = OFF;
+		    current_State = ADC_TEST;
+		}
+	    }
+	    break;
 		
-		case ADC_TEST:
-			static int cont_adc = 0;
-			if(actualizarTecladoMatricial() == '#'){
-				cont_adc ++;
-				if(cont_adc == 1){
-					serial_port.write( "TENSION DE BATERIA\r\n", 20);
-				} else if(cont_adc == 2){
-					serial_port.write( "TENSION DE ZONA\r\n", 17);
-				} else{
-					current_State = END_TEST;
-					serial_port.write( "Presione Tecla # para terminar\r\n", 32);
-					break;
-				}
-				taskADC(cont_adc);
-				serial_port.write( "Presione Tecla # para continuar\r\n", 33);
-		    break;
+	case ADC_TEST:
+	    static int cont_adc = 0;
+		if(actualizarTecladoMatricial() == '#'){
+		    cont_adc ++;
+		    if(cont_adc == 1){
+			serial_port.write( "TENSION DE BATERIA\r\n", 20);
+		    } else if(cont_adc == 2){
+			serial_port.write( "TENSION DE ZONA\r\n", 17);
+		    } else{//controlar
+			current_State = END_TEST;
+			serial_port.write( "Presione Tecla # para terminar\r\n", 32);
+			break;
+		    }
+		taskADC(cont_adc);
+		serial_port.write( "Presione Tecla # para continuar\r\n", 33);
+	    break;
 
-		case END_TEST:
-			static bool endTest = false;
-            if(actualizarTecladoMatricial()){
-
-            }
-			//if((actualizarTecladoMatricial() == '#') && (endTest == false)){
+	case END_TEST:
+	    static bool endTest = false;
             if(actualizarTecladoMatricial() == '#'){
-				serial_port.write( "FINAL DEL TEST\r\n", 16);
-				endTest = true;
-			} else if(endTest == true){
-				blinking_all_leds();
-			}
-		break;		
-		default:
-		break;
+		serial_port.write( "FINAL DEL TEST\r\n", 16);
+		endTest = true;
+		} else if(endTest == true){
+		    blinking_all_leds();
+		}
+	    break;		
+	default:
+	break;
     }
 }
-}
-
 
 void secuenciaLed(){		
 }
@@ -491,19 +481,19 @@ bool detectarInicioTest(){
 
         for ( columna = 0; columna < TEC_MAT_NUM_COLUMNAS; columna++ ){//-----COLUMNA-------
             if (tecladoMatricialColumnasPins[columna] == OFF) {
-				if(indice2caracerMatricial[fila][columna] == '1' && primera_tecla == false){
-					primera_tecla = true;
-				} else if(indice2caracerMatricial[fila][columna] == '#' && segunda_tecla == false){
-					segunda_tecla = true;
-				}
-			}
+		if(indice2caracerMatricial[fila][columna] == '1' && primera_tecla == false){
+		    primera_tecla = true;
+		} else if(indice2caracerMatricial[fila][columna] == '#' && segunda_tecla == false){
+		    segunda_tecla = true;
+		}
+	    }
         }
     }
-	if (primera_tecla == true && segunda_tecla == true){
-		return true;
-	}else{
-		return false;
-	}
+    if (primera_tecla == true && segunda_tecla == true){
+	return true;
+    }else{
+	return false;
+    }
 }
 
 void taskADC(int adc_a_leer){
@@ -513,9 +503,9 @@ void taskADC(int adc_a_leer){
     voltageReading = 3.3 * lecturasAdc[adc_a_leer].read();
     stringLength = sprintf(str, "Voltaje: %.2f V\r\n", voltageReading);
 	if (stringLength <= 0) {
-		serial_port.write( "ERROR LECTURA ADC\r\n", 19);
+	    serial_port.write( "ERROR LECTURA ADC\r\n", 19);
 	} else {
-		serial_port.write(str, stringLength);
+	    serial_port.write(str, stringLength);
 	}
 }
 
