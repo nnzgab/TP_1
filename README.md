@@ -2,7 +2,7 @@
 
 # TRABAJO PRACTICO N°2
 
-#### Funcionalidades de la segunda entrega que corresponde al TP N°2 incluye:
+#### Segunda entrega que corresponde al TP N°2 incluye:
 
 * Teclado Matricial
 * Maquina de estados finitos
