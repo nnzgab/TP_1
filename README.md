@@ -1,6 +1,13 @@
 # CURSO ONLINE DE SISTEMAS EMBEBIDOS - Arm Book - Edición 2024
 
-# TRABAJO PRACTICO N°1 - PRIMER ENTREGA
+# TRABAJO PRACTICO N°2
+
+#### Funcionalidades de la segunda entrega que corresponde al TP N°2 incluye:
+
+* **Teclado Matricial
+* **Maquina de estados finitos
+* **Modularizacion en archivos
+* 
 ***
 ## Alumno NUñEZ Gabriel Eduardo  
 ## Email: nunezgabrieleduardo@gmail.com
@@ -33,7 +40,7 @@ El objetivo principal de este proyecto es desarrollar e implementar un firmware 
 >
 >#### Inicio del test.
 >
->* Para iniciar el test, el usuario debe presionar una combinación específica de dos teclas (por ejemplo, '#' y '6') dentro del período de la cuenta regresiva.
+>* Para iniciar el test, el usuario debe presionar una combinación específica de dos teclas (por ejemplo, '#' y '1') dentro del período de la cuenta regresiva.
 >* Si se inicia el test correctamente, se mostrará el mensaje "INICIO DE TEST" en el monitor serial.
 >
 >#### Prueba de ingreso de teclas.
@@ -56,26 +63,6 @@ El objetivo principal de este proyecto es desarrollar e implementar un firmware 
 >* La finalización del test se verá con todos los leds parpadeando intermitentemente.
 >* Durante la ejecución del test, si el usuario no pasa al siguiente estado dentro de un período de 6 segundos, el test se finalizará automáticamente.
 >
-### Aclaración sobre las funcionalidades de la primera entrega del proyecto.
-
-Es importante destacar que esta entrega representa una fase inicial del desarrollo, y se prevén mejoras e implementaciones adicionales en entregas posteriores.
-
-#### Funcionalidades de la primera entrega.
-
-* **Prueba de pulsadores individuales:** El sistema permitirá la prueba de tres pulsadores individuales, simulando el ingreso de teclas. Esta funcionalidad se implementará como paso previo a la futura integración de un teclado matricial completo.
-* **Control de LEDs de sistema:** Se implementará el control de tres LEDs de sistema, permitiendo verificar su correcto funcionamiento.
-* **Prueba de buzzer:** Se incluirá la prueba del buzzer, evaluando su capacidad para emitir sonidos de alerta o notificación.
-* **Lectura básica de entrada analógica:** Se implementará una lectura básica de la entrada analógica del teclado, utilizando el conversor analógico-digital (ADC). Esta funcionalidad se mejorará en entregas posteriores para una medición más precisa.
-
-
-***Cambio de hardware***
-
-El microcontrolador STM32F031C6T6 por el microcontrolador STM32F103.[^1]
-
-[^1]: Inicialmente, se había planteado utilizar el microcontrolador STM32F031C6T6 compatible con la placa NUCLEO-F031K6. Sin embargo, debido a que este microcontrolador no es compatible con Keil Studio Cloud (y está marcado como descontinuado por Mbed), se ha decidido utilizar la placa Blue Pill basada en el microcontrolador STM32F103.
-
-
--------------------
 
 
 
