@@ -4,10 +4,10 @@
 
 #### Funcionalidades de la segunda entrega que corresponde al TP N°2 incluye:
 
-* **Teclado Matricial
-* **Maquina de estados finitos
-* **Modularizacion en archivos
-* 
+* Teclado Matricial
+* Maquina de estados finitos
+* Modularizacion en archivos
+  
 ***
 ## Alumno NUñEZ Gabriel Eduardo  
 ## Email: nunezgabrieleduardo@gmail.com
