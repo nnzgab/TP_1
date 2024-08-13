@@ -159,7 +159,7 @@ void actualizarEstado(){
 	case TEC_NUM_TEST:
             if(ActTecMat() == '#'){
                 timeOutReset();
-                current_State = LED_SISTEMA_TEST;//TEC_P_TEST;
+                current_State = LED_SISTEMA_TEST;
                 mensajeContinuarSecuencia();
             }
             break;
@@ -194,7 +194,7 @@ void actualizarEstado(){
 	    }
             break;
 
-	case BUZZER_TEST://OJO CUANDO DA TRUE VER BUZZER.CPP
+	case BUZZER_TEST:
             if(buzzerUpdate()){
                 current_State = ADC_TEST;
                 mensajeContinuarSecuencia();
