@@ -10,7 +10,6 @@
 #include "test_states.h"
 #include "time_out.h"
 
-
 //=====[Declaration of private defines]========================================
 
 //=====[Declaration of private data types]=====================================
@@ -34,10 +33,12 @@ void functionalTestInit(){
     buzzerInit();
     mensajeInicial();
 }
+
 void functionalTestUpdate(){
-	actualizarEstado();
-	checkTimeout();
-	delay(TIME_INCREMENT_MS);
+    actualizarEstado();
+    checkTimeout();
+    delay(TIME_INCREMENT_MS);
 }
+
 //=====[Implementations of private functions]==================================
 
