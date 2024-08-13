@@ -22,12 +22,12 @@
 #define TIEMPO_ANTIREBOTE_MS 40
 
 //TECLADO MATRICIAL entradas
-#define C1      	    PB_0
+#define C1      	PB_0
 #define C2              PB_1
 #define C3              PB_4
 
 //TECLADO MATRICIAL salidas:
-#define F1      	    PA_8
+#define F1      	PA_8
 #define F2              PA_9
 #define F3              PA_10
 #define F4              PA_15
@@ -56,12 +56,11 @@ DigitalIn tecladoMatricialColumnasPins[TEC_MAT_NUM_COLUMNAS] = {C1, C2, C3};
 static estado_teclado_matricial_t tecladoMatricialEstado;
 
 static char indice2caracerMatricial[4][3] = {
-        {'1', '2', '3'},
-        {'4', '5', '6'},
-        {'7', '8', '9'},
-        {'*', '0', '#'}
-    };
-//static int timeIncrement_ms = 0;
+    {'1', '2', '3'},
+    {'4', '5', '6'},
+    {'7', '8', '9'},
+    {'*', '0', '#'}
+};
 
 //=====[Declarations (prototypes) of private functions]========================
 
@@ -79,8 +78,8 @@ void tecladoMatricialInit(){
 }
 
 bool detectarInicioTest(){
-	static bool primera_tecla = false;
-	static bool segunda_tecla = false;
+    static bool primera_tecla = false;
+    static bool segunda_tecla = false;
     int fila = 0;
     int columna = 0;
     int i = 0;
@@ -93,23 +92,23 @@ bool detectarInicioTest(){
 
         for ( columna = 0; columna < TEC_MAT_NUM_COLUMNAS; columna++ ){
             if (tecladoMatricialColumnasPins[columna] == OFF) {
-				if(indice2caracerMatricial[fila][columna] == '1' && primera_tecla == false){
-					primera_tecla = true;
-				} else if(indice2caracerMatricial[fila][columna] == '#' && segunda_tecla == false){
-					segunda_tecla = true;
-				}
-			}
+		if(indice2caracerMatricial[fila][columna] == '1' && primera_tecla == false){
+		    primera_tecla = true;
+		} else if(indice2caracerMatricial[fila][columna] == '#' && segunda_tecla == false){
+		    segunda_tecla = true;
+		}
+	    }
         }
     }
-	if (primera_tecla == true && segunda_tecla == true){
+    if (primera_tecla == true && segunda_tecla == true){
         primera_tecla = false;
         segunda_tecla = false;
-		return true;
-	}else{
-        primera_tecla = false;
-        segunda_tecla = false;
-		return false;
-	}
+	return true;
+    } else {
+	primera_tecla = false;
+	segunda_tecla = false;
+	return false;
+    }
 }
 
 char ActTecMat() {
@@ -163,13 +162,6 @@ static char escaneoTecladoMatricial(){
     int fila = 0;
     int columna = 0;
     int i = 0;
-
-    //char indice2caracerMatricial[4][3] = {
-    //    {'1', '2', '3'},
-    //    {'4', '5', '6'},
-    //    {'7', '8', '9'},
-    //    {'*', '0', '#'}
-    //};
     
     for ( fila = 0; fila < TEC_MAT_NUM_FILAS; fila++ ) {
 
@@ -180,11 +172,11 @@ static char escaneoTecladoMatricial(){
 
         for ( columna = 0; columna < TEC_MAT_NUM_COLUMNAS; columna++ ){
             if (tecladoMatricialColumnasPins[columna] == OFF) {
-				return indice2caracerMatricial[fila][columna];
-			}
+	        return indice2caracerMatricial[fila][columna];
+	    }
         }
     }
-	return '\0';
+    return '\0';
 }
 
 static void tecladoMatricialReset(){
