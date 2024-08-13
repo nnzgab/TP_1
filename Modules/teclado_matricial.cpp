@@ -38,7 +38,7 @@
 typedef enum {
     ESCANEANDO_TEC_MAT,
     ANTIREBOTE_TEC_MAT,
-    MANTINE_PRESIONADO_TEC_MAT
+    MANTIENE_PRESIONADO_TEC_MAT
 } estado_teclado_matricial_t;
 
 //=====[Declaration and initialization of public global objects]===============
@@ -131,7 +131,7 @@ char ActTecMat() {
             if( tiempoAcumuladoAntirebote_tecladoMatricial >= TIEMPO_ANTIREBOTE_MS){
                 teclaDetectada = escaneoTecladoMatricial();
                 if ( teclaDetectada == ultimaTeclaPresionada ) {
-                    tecladoMatricialEstado = MANTINE_PRESIONADO_TEC_MAT;
+                    tecladoMatricialEstado = MANTIENE_PRESIONADO_TEC_MAT;
                 } else {
                     tecladoMatricialEstado = ESCANEANDO_TEC_MAT;
                 }
@@ -139,7 +139,7 @@ char ActTecMat() {
             tiempoAcumuladoAntirebote_tecladoMatricial = tiempoAcumuladoAntirebote_tecladoMatricial + TIME_INCREMENT_MS;
             break;
 
-        case MANTINE_PRESIONADO_TEC_MAT:
+        case MANTIENE_PRESIONADO_TEC_MAT:
             teclaDetectada = escaneoTecladoMatricial();
             if ( teclaDetectada != ultimaTeclaPresionada ) {
                 if ( teclaDetectada == '\0' ) {
