@@ -4,7 +4,7 @@
 #define _BUZZER_H_
 
 //=====[Declaration of public defines]=========================================
-#define BUZZER		        PB_5
+#define BUZZER		    PB_5
 #define BUZZER_TIME_ON      300
 //=====[Declaration of public data types]======================================
 
