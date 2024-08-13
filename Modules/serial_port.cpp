@@ -5,14 +5,6 @@
 
 #include "serial_port.h"
 
-//#include ".h"
-//#include ".h"
-//#include ".h"
-//#include ".h"
-//#include ".h"
-//#include ".h"
-//#include ".h"
-
 //=====[Declaration of private defines]========================================
 
 //=====[Declaration of private data types]=====================================
