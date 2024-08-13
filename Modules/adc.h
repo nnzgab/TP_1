@@ -5,7 +5,7 @@
 
 //=====[Declaration of public defines]=========================================
 
-#define MAX_ADC    2
+#define MAX_ADC        2
 #define VZONA        	PA_0
 #define VBAT        	PA_1
 #define ADCZONA        	0
