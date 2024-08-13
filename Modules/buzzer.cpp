@@ -36,6 +36,7 @@ bool buzzerUpdate(){
     outBuzzer = ON;
     if (timeOnBuzzer > BUZZER_TIME_ON) {
         outBuzzer = OFF;
+        timeOnBuzzer = 0;
         return true;
     }
     return false;
