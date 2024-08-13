@@ -36,10 +36,6 @@ bool buzzerUpdate(){
     outBuzzer = ON;
     if (timeOnBuzzer > BUZZER_TIME_ON) {
         outBuzzer = OFF;
-        //current_State = ADC_TEST;
-        //timeOut = 0;
-        //serial_port.write( "Presione Tecla # para continuar\r\n", 33);
-        // si termino de sonar cambio de estado pongo time cero y mando mensaje pero desde quien llama
         return true;
     }
     return false;
