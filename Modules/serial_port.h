@@ -20,18 +20,3 @@ void mensajeTimeOut();
 //=====[#include guards - end]=================================================
 
 #endif // _SERIAL_PORT_H_
-
-
-
-
-
-
-
-
-
-
-
-
-void mensajeInicial();
-void continuarTecla();
-void continuarSecuencia();
