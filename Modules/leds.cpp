@@ -85,31 +85,31 @@ void prenderLedZonaNumero(int numeroLed){
 }
 
 void secuenciaLed(){
-        static int timeBlink = 0;
-        timeBlink = timeBlink + TIME_INCREMENT_MS;
-        if(timeBlink < 500){
-            LedZonaOn();
-            LedSistemInit();
-        } else if (timeBlink < 1000){
-            LedSistemOn();
-            LedZonaInit();
-        }else{
-            timeBlink = 0;
-        }
+    static int timeBlink = 0;
+    timeBlink = timeBlink + TIME_INCREMENT_MS;
+    if(timeBlink < 500){
+        LedZonaOn();
+        LedSistemInit();
+    } else if (timeBlink < 1000){
+        LedSistemOn();
+        LedZonaInit();
+    }else{
+        timeBlink = 0;
+    }
 }	
 
 void blinking_all_leds(){
-        static int timeBlink = 0;
-        timeBlink = timeBlink + TIME_INCREMENT_MS;
-        if (timeBlink < 500) {
-            LedZonaOn();
-            LedSistemOn();
-        } else if (timeBlink < 1000) {
-            LedZonaInit();
-            LedSistemInit();
-        } else {
-            timeBlink = 0;
-        }
+    static int timeBlink = 0;
+    timeBlink = timeBlink + TIME_INCREMENT_MS;
+    if (timeBlink < 500) {
+        LedZonaOn();
+        LedSistemOn();
+    } else if (timeBlink < 1000) {
+        LedZonaInit();
+        LedSistemInit();
+    } else {
+        timeBlink = 0;
+    }
 }
 
 //=====[Implementations of private functions]==================================
