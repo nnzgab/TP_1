@@ -3,7 +3,6 @@
 #include "buzzer.h"
 #include "mbed.h"
 #include "arm_book_lib.h"
-
 #include "test_states.h"
 #include "leds.h"
 #include "time_out.h"
@@ -19,7 +18,7 @@
 //ESTADOS PARA EL TESTEO
 typedef enum {
     PREVIOUS_TEST,
-	TEC1_TEST,
+    TEC1_TEST,
     TEC2_TEST,
     TEC3_TEST,
     TEC4_TEST,
@@ -35,7 +34,7 @@ typedef enum {
     LED_ZONAS_TEST,
     BUZZER_TEST,
     ADC_TEST,
-	END_TEST
+    END_TEST
 } testState_t;
 
 //=====[Declaration and initialization of public global objects]===============
@@ -60,16 +59,16 @@ void actualizarEstado(){
     switch (current_State) {
         case PREVIOUS_TEST:
             secuenciaLed();
-			if( detectarInicioTest() == true ){
-				timeOutReset();
+	    if( detectarInicioTest() == true ){
+		timeOutReset();
                 LedSistemInit();
                 LedZonaInit();
                 mensajeInciaTest();
                 current_State = TEC1_TEST;
-			}
+	    }
             break;
 			
-		case TEC1_TEST:
+	case TEC1_TEST:
             if(ActTecMat() == '1'){
                 timeOutReset();
                 current_State = TEC2_TEST;
@@ -85,7 +84,7 @@ void actualizarEstado(){
             }
             break;
 		
-		case TEC3_TEST:
+	case TEC3_TEST:
             if(ActTecMat() == '3'){
                 timeOutReset();
                 current_State = TEC4_TEST;
@@ -101,7 +100,7 @@ void actualizarEstado(){
             }
             break;
 
-		case TEC5_TEST:
+	case TEC5_TEST:
             if(ActTecMat() == '5'){
                 timeOutReset();
                 current_State = TEC6_TEST;
@@ -117,7 +116,7 @@ void actualizarEstado(){
             }
             break;
 		
-		case TEC7_TEST:
+	case TEC7_TEST:
             if(ActTecMat() == '7'){
                 timeOutReset();
                 current_State = TEC8_TEST;
@@ -133,7 +132,7 @@ void actualizarEstado(){
             }
             break;
 
-		case TEC9_TEST:
+	case TEC9_TEST:
             if(ActTecMat() == '9'){
                 timeOutReset();
                 current_State = TEC0_TEST;
@@ -157,7 +156,7 @@ void actualizarEstado(){
             }
             break;
 			
-		case TEC_NUM_TEST:
+	case TEC_NUM_TEST:
             if(ActTecMat() == '#'){
                 timeOutReset();
                 current_State = LED_SISTEMA_TEST;//TEC_P_TEST;
@@ -165,9 +164,9 @@ void actualizarEstado(){
             }
             break;
 
-		case LED_SISTEMA_TEST:
-			static int cont = 0;
-			if(ActTecMat() == '#'){
+	case LED_SISTEMA_TEST:
+	    static int cont = 0;
+	    if(ActTecMat() == '#'){
                 timeOutReset();
                 if(cont<MAX_LED_SISTEMA){
                     prenderLedSistemaNumero(cont);
@@ -177,12 +176,12 @@ void actualizarEstado(){
                     current_State = LED_ZONAS_TEST;
                     LedSistemInit();
                 }
-			}
+	    }
             break;
 			
-		case LED_ZONAS_TEST:
-			static int cont_led = 0;
-			if(ActTecMat() == '#'){
+	case LED_ZONAS_TEST:
+	    static int cont_led = 0;
+	    if(ActTecMat() == '#'){
                 timeOutReset();
                 if(cont_led<MAX_LED_ZONAS){
                     prenderLedZonaNumero(cont_led);
@@ -192,10 +191,10 @@ void actualizarEstado(){
                     current_State = BUZZER_TEST;
                     LedZonaInit();
                 }
-			}
+	    }
             break;
 
-		case BUZZER_TEST://OJO CUANDO DA TRUE VER BUZZER.CPP
+	case BUZZER_TEST://OJO CUANDO DA TRUE VER BUZZER.CPP
             if(buzzerUpdate()){
                 current_State = ADC_TEST;
                 mensajeContinuarSecuencia();
@@ -204,11 +203,11 @@ void actualizarEstado(){
             }
             break;
 		
-		case ADC_TEST:
-			static int cont_adc = 0;
+	case ADC_TEST:
+	    static int cont_adc = 0;
             static float lectura = 0.0;
-			if(ActTecMat() == '#'){
-				timeOutReset();
+	    if(ActTecMat() == '#'){
+		timeOutReset();
                 switch (cont_adc) {
                 case 0:
                     lectura = lecturaAdc(cont_adc);
@@ -241,6 +240,7 @@ void actualizarEstado(){
         break;
     }
 }
+
 bool checkEndState(){
     if( current_State == END_TEST){
         return true;
