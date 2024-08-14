@@ -80,33 +80,18 @@ void tecladoMatricialInit(){
 bool detectarInicioTest(){
     static bool primera_tecla = false;
     static bool segunda_tecla = false;
-    int fila = 0;
-    int columna = 0;
-    int i = 0;
-    for ( fila = 0; fila < TEC_MAT_NUM_FILAS; fila++ ) {
-
-        for ( i = 0; i < TEC_MAT_NUM_FILAS; i++ ){
-            tecladoMatricialFilasPins[i] = ON;
-        }
-        tecladoMatricialFilasPins[fila] = OFF;
-
-        for ( columna = 0; columna < TEC_MAT_NUM_COLUMNAS; columna++ ){
-            if (tecladoMatricialColumnasPins[columna] == OFF) {
-		if(indice2caracerMatricial[fila][columna] == '1' && primera_tecla == false){
-		    primera_tecla = true;
-		} else if(indice2caracerMatricial[fila][columna] == '#' && segunda_tecla == false){
-		    segunda_tecla = true;
-		}
-	    }
-        }
+    char tecla = escaneoTecladoMatricial();
+    if(tecla == '1'){
+    	primera_tecla = true;
+    } else if ( tecla == '#'){
+    	segunda_tecla = true;
     }
+
     if (primera_tecla == true && segunda_tecla == true){
         primera_tecla = false;
         segunda_tecla = false;
 	return true;
     } else {
-	primera_tecla = false;
-	segunda_tecla = false;
 	return false;
     }
 }
