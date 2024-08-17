@@ -117,4 +117,4 @@ _Tabla 4: Diagrama de caso de uso número 1. Medición de corriente en tiempo re
 | Flujo Básico | El usuario conecta el dispositivo bajo prueba al sistema. El usuario pone el dispositivo bajo prueba en bajo consumo. El usuario enciende el sistema. El sistema enciende el led verde o rojo de acuerdo si el valor de corriente está dentro o fuera del limite preestablecido. |
 | Flujo Alternativo | **2.a** no se enciende ninguno de los leds. el sistema podría estar apagado. <br><br> **2.b** No se enciende ninguno de los leds y el sistema está en ON. En este caso puede encender el display para determinar el consumo por esta lectura. <br><br> **2.c** no se enciende ninguno de los leds y el sistema está en ON y el display está en ON y no tengo lectura. en este caso se debería cambiar las baterías que podrían estar descargadas.|
 
-Tabla 5: Diagrama de caso de uso número 1. Determinar si el consumo está dentro o fuera del rango establecido_
+Tabla 5: Diagrama de caso de uso número 2. Determinar si el consumo está dentro o fuera del rango establecido_
