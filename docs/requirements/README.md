@@ -49,7 +49,7 @@ LED rojo: El consumo del sensor está fuera de los límites establecidos, señal
 Además, incluirá una opción para desactivar la pantalla y utilizar solo los LEDs, brindando versatilidad en diferentes entornos.
 
 En la Figura 1 se observa un diagrama de bloques del sistema.
-![Fig 1 Diagrama en bloques del Micro-amperimetro](https://github.com/nnzgab/mbed-os-TP1_v1/blob/master/Diagrama_bloques.PNG)
+![Fig 1 Diagrama en bloques del Micro-amperimetro](https://github.com/nnzgab/TP_1/blob/TPF/docs/requirements/data/Diagrama_bloques.PNG)
 _Figura 1: Diagrama en bloques del Micro-amperimetro_
 
 
