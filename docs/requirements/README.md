@@ -73,8 +73,8 @@ _Tabla 2: Comparación entre dos productos de medición de microamperes disponib
 El microamperímetro WDCU30001 es muy similar a lo que se busca lograr, por que mide corrientes muy pequeñas y tiene un avisador para saber cuandose alcanza determinado limite, tambien pero realiza otras mediciones que no son importantes para este desarrollo, por lo que se buscará un dispositivo que mida solo microamperes en el orden preestablecido y los indique tanto con un display como leds para el estado.
 
  Links:
-* [WDCU30001 ]([https://www.agrofy.com.ar/pluviometro-omixom-omx-rain-modelo-gprs.html](https://es.aliexpress.com/item/1005006378956430.html))
-* [DT132A]([https://www.donagro.com.ar/estacion-meteorologica-daza-dzwh-2900-wifi-solar-remota-1820.html](https://articulo.mercadolibre.com.ar/MLA-1131139873-multimetro-digital-autorrango-capacimetro-temp-true-rms-l9-_JM#polycard_client=search-nordic&position=2&search_layout=grid&type=item&tracking_id=65034891-ddb5-48ba-bf3f-628254b05d48))
+* [WDCU30001 ]: (https://es.aliexpress.com/item/1005006378956430.html)
+* [DT132A]: (https://articulo.mercadolibre.com.ar/MLA-1131139873-multimetro-digital-autorrango-capacimetro-temp-true-rms-l9-_JM#polycard_client=search-nordic&position=2&search_layout=grid&type=item&tracking_id=65034891-ddb5-48ba-bf3f-628254b05d48)
 
 La Tabla 3 presenta los requerimientos del proyecto.
 
