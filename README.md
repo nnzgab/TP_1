@@ -1,2 +1,2 @@
-# TP_1
-Primera entrega del TP_1 completo
+# TP_F
+Micro-amperímetro para sensores de bajo consumo.
