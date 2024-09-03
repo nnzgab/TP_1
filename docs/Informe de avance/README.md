@@ -29,8 +29,8 @@ _Tabla 1 Requerimientos iniciales del proyecto._
 
 🔴: aún no se ha cumplido y tiene dudas si se podrá cumplir.
 
-🟡: aún no se a cumplido pero se podrá cumplir.
+🟡: aún no se ha cumplido pero se podrá cumplir.
 
 🟢: se ha cumplido
 
-***negrita aquellos que son nuevos o se han modificado*** (indique el motivo o justificación del cambio)
+***En negrita aquellos que son nuevos o se han modificado*** (indique el motivo o justificación del cambio)
