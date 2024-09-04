@@ -1,36 +1,36 @@
 ### Cumplimento de los requerimientos.
 
-| Grupo | ID | Descripción | Estado |
+| Grupo | ID | Descripci贸n | Estado |
 |:---|:---|:---|:---|
-| Funcionalidad | 1.1 | Medir corrientes eléctricas DC en el rango de 1 uA a 100 uA. | ?? |
-| Funcionalidad | 1.2 | Indicar en tiempo real si la corriente medida está dentro o fuera de los límites preestablecidos. |   ??  |
-| Funcionalidad | 1.3 | Mostrar el valor de la corriente medida en un display. |  ??   |
-| Hardware | 2.1 | Incorporar un display LCD de 16x2 caracteres. |  ?? |
-| Hardware | 2.2 | Utilizar LEDs indicadores (verde y rojo) para se?alizar si la medición está dentro o fuera de los límites preestablecidos. | ??  |
-| Hardware | 2.3 | El sistema se conectará al dispositivo bajo prueba con pinzas cocodrilo. |  ?? |
-| Hardware | 2.4 | El sistema tendrá una llave de encendido. |  ??   |
-| Hardware | 2.5 | El sistema tendrá una llave para poder apagar el display con llave on/off. |  ??   |
-| Alimentación | 3.1 | El dispositivo debe ser alimentado con baterías CR123A. | ??  |
-| Alimentación | 3.2 | Implementar un sistema de bajo consumo para prolongar la vida útil de la batería. |  ??   |
-| Alimentación | 3.3 | No incluye cargador de batería. |  ?? |
-| Alimentación | 3.4 | **No incluye detección de nivel de batería. --> Se incuira un indicador de bateria baja** | ??  |
-| Tiempo de ejecución| 4.1 | El proyecto se entregará antes del 17 de Septiembre de 2024. |  ??   |
-| Manual de uso y Documentación | 5.1 | El código del sistema embebido estará disponible en un repositorio Git, acompa?ado de un informe detallado con lista de partes, diagramas de conexión, requerimientos cumplidos, forma de uso y conclusiones. |  ??   |
-| Costo | 6.1 | El costo será menor a 35 dólares. |  ??   |
+| Funcionalidad | 1.1 | Medir corrientes el茅ctricas DC en el rango de 1 uA a 100 uA. | 馃煛 |
+| Funcionalidad | 1.2 | Indicar en tiempo real si la corriente medida est谩 dentro o fuera de los l铆mites preestablecidos. |   馃煛  |
+| Funcionalidad | 1.3 | Mostrar el valor de la corriente medida en un display. |  馃煛   |
+| Hardware | 2.1 | Incorporar un display LCD de 16x2 caracteres. |  馃煝 |
+| Hardware | 2.2 | Utilizar LEDs indicadores (verde y rojo) para se帽alizar si la medici贸n est谩 dentro o fuera de los l铆mites preestablecidos. | 馃煝  |
+| Hardware | 2.3 | El sistema se conectar谩 al dispositivo bajo prueba con pinzas cocodrilo. |  馃煝 |
+| Hardware | 2.4 | El sistema tendr谩 una llave de encendido. |  馃煛   |
+| Hardware | 2.5 | El sistema tendr谩 una llave para poder apagar el display con llave on/off. |  馃煛   |
+| Alimentaci贸n | 3.1 | El dispositivo debe ser alimentado con bater铆as CR123A. | 馃煝  |
+| Alimentaci贸n | 3.2 | Implementar un sistema de bajo consumo para prolongar la vida 煤til de la bater铆a. |  馃煛   |
+| Alimentaci贸n | 3.3 | No incluye cargador de bater铆a. |  馃煝 |
+| Alimentaci贸n | 3.4 | **No incluye detecci贸n de nivel de bater铆a. --> Se incluir谩 un indicador de bater铆a baja** | 馃煝  |
+| Tiempo de ejecuci贸n| 4.1 | El proyecto se entregar谩 antes del 17 de Septiembre de 2024. |  馃煛   |
+| Manual de uso y Documentaci贸n | 5.1 | El c贸digo del sistema embebido estar谩 disponible en un repositorio Git, acompa帽ado de un informe detallado con lista de partes, diagramas de conexi贸n, requerimientos cumplidos, forma de uso y conclusiones. |  馃煛   |
+| Costo | 6.1 | El costo ser谩 menor a 35 d贸lares. |  馃煛   |
 
 _Tabla 1 Requerimientos iniciales del proyecto._
 
 > [!NOTE]
 > ### Modificaciones realizadas:
-> **3.4 Alimentación: No incluye detección de nivel de batería. --> Se incuira un indicador de bateria baja**
->  Para garantizar la precisión de las mediciones, se ha incluido un indicador visual que se apagará cuando la batería necesite ser reemplazada. Esto evitará obtener lecturas erróneas.
+> **3.4 Alimentaci贸n: No incluye detecci贸n de nivel de bater铆a. --> Se incluira un indicador de bater铆a baja**
+>  Para garantizar la precisi贸n de las mediciones, se ha incluido un indicador visual que se apagar谩 cuando la bater铆a necesite ser reemplazada. Esto evitar谩 obtener lecturas err贸neas.
 
-### Referencias del estado de situación:
+### Referencias del estado de situaci贸n:
 
-??: aún no se ha cumplido y tiene dudas si se podrá cumplir.
+馃敶: a煤n no se ha cumplido y tiene dudas si se podr谩 cumplir.
 
-??: aún no se a cumplido pero se podrá cumplir.
+馃煛: a煤n no se ha cumplido pero se podr谩 cumplir.
 
-??: se ha cumplido
+馃煝: se ha cumplido
 
-***negrita aquellos que son nuevos o se han modificado*** (indique el motivo o justificación del cambio)
+***En negrita aquellos que son nuevos o se han modificado*** (indique el motivo o justificaci贸n del cambio)
